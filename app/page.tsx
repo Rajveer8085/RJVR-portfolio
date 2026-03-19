@@ -3,6 +3,7 @@ import Image from "next/image";
 import { HomeSection } from "./components/Hero";
 import { AboutSection } from "./components/AboutSection";
 import SkillSection from "./components/Skillsection";
+import TechStack from "./components/Techstack"
 
 export default function Home() {
   return (
@@ -11,6 +12,8 @@ export default function Home() {
     <HomeSection />
     <AboutSection  />
     <SkillSection />
+    <TechStack /> 
+    <AboutSection  />
     </>
   );
 }

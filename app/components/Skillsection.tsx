@@ -1,26 +1,25 @@
 "use client"
 
-import SolarSystem from "./Solarsystem"
+import SolarSystem from "./SolarSystem"
 
 export default function SkillSection(){
   return (
-    <section className="relative py-32 bg-black text-white overflow-hidden">
+    <section className="relative pt-16 pb-4 bg-[#020412] text-white overflow-hidden">
 
       {/* Heading */}
-      <div className="max-w-6xl mx-auto text-center mb-16">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-          My Tech Universe
-        </h2>
+      <div className="absolute inset-0 star-bg pointer-events-none"></div>
 
-        <p className="text-gray-400 mt-4">
-          Technologies I work with orbiting around my core skills
-        </p>
-      </div>
+  {/* Heading */}
+  <div className="relative max-w-6xl mx-auto text-center mb-16">
+    <h2 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+      My Tech Universe
+    </h2>
 
-      {/* Solar System */}
-      <div className="w-full h-[700px]">
-        <SolarSystem />
-      </div>
+    <p className="text-gray-400 mt-4">
+      Technologies I work with orbiting around my core skills
+    </p>
+  </div>
+    <SolarSystem />
 
     </section>
   )

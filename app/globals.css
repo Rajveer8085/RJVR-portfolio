@@ -200,3 +200,31 @@ body {
 .card-spotlight:focus-within::before {
   opacity: 0.6;
 }
+
+.star-bg {
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, white, transparent),
+    radial-gradient(1px 1px at 40px 70px, white, transparent),
+    radial-gradient(2px 2px at 90px 40px, white, transparent),
+    radial-gradient(1px 1px at 130px 80px, white, transparent),
+    radial-gradient(2px 2px at 160px 20px, white, transparent);
+    
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  opacity: 0.5;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide {
+  animation: slideIn 0.5s ease;
+}
