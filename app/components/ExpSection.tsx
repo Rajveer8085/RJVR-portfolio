@@ -41,7 +41,7 @@ export const Experience = () => {
   const scaleY = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   return (
-    <section ref={containerRef} className="relative py-32 bg-transparent text-white">
+    <section ref={containerRef} className="relative py-14 bg-transparent text-white">
       {/* Dynamic Background Accents */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[120px] -z-10 animate-pulse" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-pink-600/5 rounded-full blur-[120px] -z-10" />
@@ -68,7 +68,7 @@ export const Experience = () => {
             className="absolute left-8 md:left-1/2 md:-translate-x-1/2 top-0 w-[2px] h-full bg-gradient-to-b from-purple-500 via-pink-500 to-transparent shadow-[0_0_15px_rgba(168,85,247,0.5)]"
           />
 
-          <div className="space-y-32">
+          <div className="space-y-10 md:space-y-32">
             {experiences.map((exp, index) => (
               <ExperienceCard key={index} exp={exp} index={index} />
             ))}
@@ -101,7 +101,7 @@ const ExperienceCard = ({ exp, index }: { exp: ExperienceType, index: number }) 
           boxShadow: isInView ? "0 0 30px #d946ef" : "none"
         }}
         transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute left-8 md:left-1/2 md:-translate-x-1/2 w-3 h-3 rounded-full bg-pink-500 z-20 border-4 border-slate-950"
+        className="absolute left-7 md:left-[49.6%] md:-translate-x-1/2 w-3 h-3 rounded-full bg-pink-500 z-20 border-4 border-slate-950"
       />
 
       {/* Card Content */}

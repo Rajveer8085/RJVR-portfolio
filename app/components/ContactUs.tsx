@@ -19,7 +19,7 @@ export const Contact = () => {
   };
 
   return (
-    <section className="relative py-24 bg-[#030014] text-white overflow-hidden min-h-screen flex items-center">
+    <section className="relative py-16 bg-[#030014] text-white overflow-hidden min-h-screen flex items-center">
       {/* Background Ambience */}
       <div className="absolute top-[-10%] left-[-5%] w-[50%] h-[50%] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none opacity-60" />
       <div className="absolute bottom-[-10%] right-[-5%] w-[50%] h-[50%] bg-pink-600/10 rounded-full blur-[120px] pointer-events-none opacity-60" />
@@ -69,8 +69,8 @@ export const Contact = () => {
             <form onSubmit={handleSubmit} className="relative group/form">
               <div className="relative p-8 md:p-14 rounded-[2.5rem] bg-white/[0.02] border border-white/10 shadow-2xl backdrop-blur-3xl overflow-hidden">
                 
-                <div className="space-y-12">
-                  <div className="grid md:grid-cols-2 gap-x-12 gap-y-12">
+                <div className="space-y-8">
+                  <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
                     <FloatingInput label="Full Name" icon={<User size={18}/>} />
                     <FloatingInput label="Email Address" type="email" icon={<Mail size={18}/>} />
                   </div>

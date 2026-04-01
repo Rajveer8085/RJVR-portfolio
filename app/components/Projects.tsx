@@ -65,7 +65,7 @@ export const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="relative py-24 bg-[#030014] text-white overflow-hidden">
+    <section className="relative py-14 bg-[#030014] text-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Header Area */}

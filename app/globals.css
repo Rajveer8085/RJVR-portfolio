@@ -18,6 +18,10 @@
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
 }
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
 @layer components {
    .glass {
     background: linear-gradient(
