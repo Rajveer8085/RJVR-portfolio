@@ -43,8 +43,8 @@ export const Experience = () => {
   return (
     <section ref={containerRef} className="relative py-14 bg-transparent text-white">
       {/* Dynamic Background Accents */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[120px] -z-10 animate-pulse" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-pink-600/5 rounded-full blur-[120px] -z-10" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[80px] -z-10 animate-pulse" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-pink-600/5 rounded-full blur-[80px] -z-10" />
 
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col items-center mb-24">
@@ -55,7 +55,7 @@ export const Experience = () => {
           >
             My Journey
           </motion.span>
-          <h2 className="text-5xl md:text-7xl font-black text-center tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-center tracking-tight">
             Professional <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-400 bg-clip-text text-transparent">Path.</span>
           </h2>
         </div>
@@ -89,7 +89,7 @@ const ExperienceCard = ({ exp, index }: { exp: ExperienceType, index: number }) 
       {/* Floating Index Number */}
       <motion.span 
         animate={{ opacity: isInView ? 0.1 : 0 }}
-        className="absolute hidden md:block text-[12rem] font-black pointer-events-none -z-10 left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
+        className="absolute hidden md:block text-[6rem] md:text-[10rem] font-black pointer-events-none -z-10 left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
       >
         0{index + 1}
       </motion.span>
@@ -98,18 +98,18 @@ const ExperienceCard = ({ exp, index }: { exp: ExperienceType, index: number }) 
       <motion.div 
         animate={{ 
           scale: isInView ? [1, 1.5, 1] : 1,
-          boxShadow: isInView ? "0 0 30px #d946ef" : "none"
+          boxShadow: isInView ? "0 0 15px #d946ef": "none"
         }}
         transition={{ repeat: Infinity, duration: 2 }}
         className="absolute left-7 md:left-[49.6%] md:-translate-x-1/2 w-3 h-3 rounded-full bg-pink-500 z-20 border-4 border-slate-950"
       />
 
       {/* Card Content */}
-      <div className={`w-full md:w-[42%] pl-20 md:pl-0 ${isEven ? "md:mr-auto" : "md:ml-auto"}`}>
+      <div className={`w-full md:w-[42%] pl-14 sm:pl-16 md:pl-0 md:pl-0 ${isEven ? "md:mr-auto" : "md:ml-auto"}`}>
         <motion.div
           initial={{ opacity: 0, x: isEven ? -100 : 100, scale: 0.9 }}
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="group relative"
         >
           {/* Glass Card */}
@@ -141,6 +141,7 @@ const ExperienceCard = ({ exp, index }: { exp: ExperienceType, index: number }) 
           {/* Holographic "Shadow" Layer */}
           <div className="absolute -inset-[1px] bg-gradient-to-r from-purple-500 to-pink-500 rounded-[2rem] opacity-0 group-hover:opacity-20 blur-sm transition-opacity duration-500" />
         </motion.div>
+        
       </div>
     </div>
   );

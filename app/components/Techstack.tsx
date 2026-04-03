@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 
 export default function TechStack() {
   const pages = [
@@ -27,7 +28,6 @@ export default function TechStack() {
   ]
 
   const [page, setPage] = useState(0)
-  const isScrolling = useRef(false)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -64,37 +64,37 @@ export default function TechStack() {
 
   return (
     <section ref={ref} className="bg-[#050505] text-white selection:bg-yellow-400 selection:text-black">
-      <div className="h-[100vh] relative">
-        <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-          
+      <div className="min-h-screen relative">
+        <div className="sticky top-0 min-h-screen flex items-center overflow-hidden">
+
           {/* BACKGROUND TEXT DECORATION */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none opacity-[0.02] transition-transform duration-1000 group-hover:scale-110">
             <h1 className="text-[25vw] font-black leading-none uppercase">Skills</h1>
           </div>
 
           <div className="max-w-7xl mx-auto w-full px-8 flex items-center justify-between relative z-10">
-            
+
             {/* LEFT SIDE: BOLD VERTICAL BAR */}
             <div className="flex flex-col items-start gap-4">
-               <div className="overflow-hidden h-32 w-[4px] bg-white/10 relative">
-                  <div 
-                    className="absolute top-0 left-0 w-full bg-yellow-400 transition-all duration-700 ease-out shadow-[0_0_15px_#facc15]"
-                    style={{ height: page === 0 ? '50%' : '100%' }}
-                  />
-               </div>
-               <div className="flex flex-col -ml-2">
-                  <p className="text-yellow-400 font-mono text-xs tracking-widest mb-1 opacity-60">0{page + 1}</p>
-                  <h2 className="text-4xl font-black uppercase tracking-tighter leading-none [writing-mode:vertical-lr] rotate-180">
-                    Capabilities
-                  </h2>
-               </div>
+              <div className="overflow-hidden h-32 w-[4px] bg-white/10 relative">
+                <div
+                  className="absolute top-0 left-0 w-full bg-yellow-400 transition-all duration-700 ease-out shadow-[0_0_15px_#facc15]"
+                  style={{ height: page === 0 ? '50%' : '100%' }}
+                />
+              </div>
+              <div className="flex flex-col -ml-2">
+                <p className="text-yellow-400 font-mono text-xs tracking-widest mb-1 opacity-60">0{page + 1}</p>
+                <h2 className="text-4xl font-black uppercase tracking-tighter leading-none [writing-mode:vertical-lr] rotate-180">
+                  Capabilities
+                </h2>
+              </div>
             </div>
 
             {/* CENTER GRID: REFINED CARDS */}
             <div className="flex-1 px-12 lg:px-20">
               <div
                 key={page}
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-5 animate-in fade-in slide-in-from-bottom-12 duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
+                className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 md:gap-5 animate-in fade-in slide-in-from-bottom-12 duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
               >
                 {pages[page].map((skill, i) => (
                   <div
@@ -103,14 +103,15 @@ export default function TechStack() {
                   >
                     {/* Interior Glow Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    
+
                     <div className="relative z-10 transform transition-all duration-500 group-hover:-translate-y-1">
-                      <img
+                      <Image
                         src={skill.icon}
                         alt={skill.name}
-                        className={`w-10 h-10 mb-3 transition-all duration-500 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] ${
-                          ["GitHub", "Vercel", "Next JS"].includes(skill.name) ? "invert" : ""
-                        }`}
+                        width={40}
+                        height={40}
+                        className={`mb-3 transition-all duration-500 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] ${["GitHub", "Vercel", "Next JS"].includes(skill.name) ? "invert" : ""
+                          }`}
                       />
                     </div>
 
@@ -134,9 +135,8 @@ export default function TechStack() {
                     onClick={() => setPage(i)}
                     className="relative p-2 group outline-none"
                   >
-                    <div className={`w-1 transition-all duration-500 ease-in-out ${
-                      page === i ? "h-12 bg-yellow-400" : "h-6 bg-white/20 group-hover:bg-white/40"
-                    }`} />
+                    <div className={`w-1 transition-all duration-500 ease-in-out ${page === i ? "h-12 bg-yellow-400" : "h-6 bg-white/20 group-hover:bg-white/40"
+                      }`} />
                     {page === i && (
                       <div className="absolute top-2 -left-1 w-3 h-12 bg-yellow-400/20 blur-md" />
                     )}

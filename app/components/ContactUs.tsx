@@ -19,10 +19,10 @@ export const Contact = () => {
   };
 
   return (
-    <section className="relative py-16 bg-[#030014] text-white overflow-hidden min-h-screen flex items-center">
+    <section id="contact-us" className="relative py-20 md:py-28 bg-[#030014] text-white overflow-hidden">
       {/* Background Ambience */}
-      <div className="absolute top-[-10%] left-[-5%] w-[50%] h-[50%] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none opacity-60" />
-      <div className="absolute bottom-[-10%] right-[-5%] w-[50%] h-[50%] bg-pink-600/10 rounded-full blur-[120px] pointer-events-none opacity-60" />
+      <div className="absolute top-[-10%] left-[-5%] w-[50%] h-[50%] bg-purple-600/10 rounded-full blur-[80px] pointer-events-none opacity-60" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-[50%] h-[50%] bg-pink-600/10 rounded-full blur-[80px] pointer-events-none opacity-60" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full">
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
@@ -40,21 +40,21 @@ export const Contact = () => {
                 Open for Collaboration
               </div>
               
-              <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-[1.1]">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[1.1]">
                 Let's craft <br />
                 <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-rose-400 bg-clip-text text-transparent">
                   Something Iconic.
                 </span>
               </h2>
               
-              <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-lg">
+              <p className="text-gray-400 text-sm sm:text-base md:text-xl leading-relaxed max-w-lg">
                 I build high-performance digital experiences that command attention. 
                 Your vision, powered by the MERN stack.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-               <ContactInfo icon={<Mail size={22}/>} label="Direct Email" value="hello@yourdomain.com" />
+               <ContactInfo icon={<Mail size={22}/>} label="Direct Email" value="Rt125280@gmail.com" />
                <ContactInfo icon={<Globe size={22}/>} label="Availability" value="Remote • Global" />
             </div>
           </motion.div>
@@ -67,7 +67,7 @@ export const Contact = () => {
             className="w-full lg:w-[55%]"
           >
             <form onSubmit={handleSubmit} className="relative group/form">
-              <div className="relative p-8 md:p-14 rounded-[2.5rem] bg-white/[0.02] border border-white/10 shadow-2xl backdrop-blur-3xl overflow-hidden">
+              <div className="relative p-6 sm:p-8 md:p-12 rounded-[2.5rem] bg-white/[0.02] border border-white/10 shadow-2xl backdrop-blur-3xl overflow-hidden">
                 
                 <div className="space-y-8">
                   <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
@@ -84,7 +84,7 @@ export const Contact = () => {
                     </div>
                     <textarea 
                       required
-                      className="peer w-full bg-transparent border-b border-white/10 py-4 pr-10 outline-none transition-all duration-500 text-lg text-gray-100 placeholder-transparent focus:border-purple-500 resize-none min-h-[50px] scrollbar-hide"
+                      className="peer w-full bg-transparent border-b border-white/10 py-4 pr-10 outline-none transition-all duration-500 text-sm sm:text-base text-gray-100 placeholder-transparent focus:border-purple-500 resize-none min-h-[50px] scrollbar-hide"
                       placeholder=" " 
                       style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     />
@@ -100,7 +100,7 @@ export const Contact = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     disabled={loading}
-                    className="relative w-full md:w-max px-12 h-16 rounded-2xl bg-white text-black font-black overflow-hidden flex items-center justify-center transition-all group/btn"
+                    className="relative w-full sm:w-max px-12 h-16 rounded-2xl bg-white text-black font-black overflow-hidden flex items-center justify-center transition-all group/btn"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
                     <span className="relative z-10 flex items-center gap-3 group-hover/btn:text-white transition-colors duration-300 text-[11px] uppercase tracking-[0.3em]">
@@ -143,7 +143,7 @@ const FloatingInput = ({ label, icon, type = "text" }: any) => {
       <input 
         type={type}
         required
-        className="peer w-full bg-transparent border-b border-white/10 py-4 pr-10 outline-none transition-all duration-500 text-lg text-gray-100 placeholder-transparent focus:border-purple-500"
+        className="peer w-full bg-transparent border-b border-white/10 py-4 pr-10 outline-none transition-all duration-500 text-sm sm:text-base text-gray-100 placeholder-transparent focus:border-purple-500"
         placeholder=" "
       />
       <label className="absolute left-0 top-4 text-gray-500 text-xs font-bold tracking-widest transition-all duration-500 pointer-events-none 

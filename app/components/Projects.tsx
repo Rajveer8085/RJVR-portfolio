@@ -2,10 +2,11 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { 
-  Sparkles, ArrowUpRight, Atom, Server, Database, 
-  ShieldCheck, Zap, Layers, Code2, Globe, Layout 
+import {
+  Sparkles, ArrowUpRight, Atom, Server, Database,
+  ShieldCheck, Zap, Layers, Code2, Globe, Layout
 } from "lucide-react";
+import Image from "next/image";
 
 const PROJECTS = [
   {
@@ -65,21 +66,21 @@ export const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="relative py-14 bg-[#030014] text-white overflow-hidden">
+    <section id="projects" className="relative py-20 md:py-28 bg-[#030014] text-white overflow-hidden px-4 sm:px-6">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
+
         {/* Header Area */}
         <div className="mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-purple-400 text-xs font-bold tracking-[0.2em] uppercase backdrop-blur-md">
             <Sparkles size={14} /> Engineering Showcase
           </div>
-          <h2 className="text-5xl md:text-6xl font-black tracking-tighter leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.2]">
             Complex <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">Architectures.</span>
           </h2>
         </div>
 
         {/* Accordion Container */}
-        <div className="flex flex-col lg:flex-row gap-4 h-[600px] w-full">
+        <div className="flex flex-col lg:flex-row gap-4 lg:h-[600px] w-full">
           {PROJECTS.map((project, index) => {
             const isActive = hoveredIndex === index;
 
@@ -88,33 +89,38 @@ export const Projects = () => {
                 key={project.id}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
+                onClick={() =>
+                  setHoveredIndex(index === hoveredIndex ? null : index)
+                }
                 animate={{ flex: isActive ? 3 : 1 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="relative rounded-[2rem] overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-3xl group cursor-pointer min-w-[120px]"
               >
                 {/* Background Image & Gradient */}
                 <div className="absolute inset-0 z-0">
-                  <motion.img 
-                    animate={{ scale: isActive ? 1 : 1.15 }}
-                    transition={{ duration: 0.8 }}
-                    src={project.image} 
-                    className="w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-700 grayscale group-hover:grayscale-0"
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    priority={index === 0}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover opacity-30 group-hover:opacity-50 transition duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-[#030014]/80 to-transparent/20" />
                 </div>
 
                 {/* Content Wrapper */}
                 <div className="relative z-10 h-full p-8 flex flex-col justify-end">
-                  
+
                   {/* Always Visible Title Area */}
                   <div className="mb-2">
-                    <motion.p 
+                    <motion.p
                       animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 10 }}
                       className="text-purple-400 text-xs font-bold uppercase tracking-widest mb-2"
                     >
                       {project.subtitle}
                     </motion.p>
-                    <h3 className="text-3xl lg:text-4xl font-black tracking-tighter whitespace-nowrap">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight">
                       {project.title}
                     </h3>
                   </div>
@@ -130,37 +136,37 @@ export const Projects = () => {
                         className="overflow-hidden"
                       >
                         <div className="pt-6 space-y-6">
-                          
+
                           {/* Problem/Solution Glass Cards */}
-                          <div className="grid grid-cols-2 gap-4">
-                             <div className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
-                                <p className="text-[10px] uppercase font-bold text-purple-400 tracking-wider mb-2 flex items-center gap-1">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" /> Problem
-                                </p>
-                                <p className="text-gray-300 text-sm leading-relaxed">{project.problem}</p>
-                             </div>
-                             <div className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
-                                <p className="text-[10px] uppercase font-bold text-green-400 tracking-wider mb-2 flex items-center gap-1">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-green-500" /> Solution
-                                </p>
-                                <p className="text-gray-300 text-sm leading-relaxed">{project.solution}</p>
-                             </div>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
+                              <p className="text-[10px] uppercase font-bold text-purple-400 tracking-wider mb-2 flex items-center gap-1">
+                                <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" /> Problem
+                              </p>
+                              <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">{project.problem}</p>
+                            </div>
+                            <div className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
+                              <p className="text-[10px] uppercase font-bold text-green-400 tracking-wider mb-2 flex items-center gap-1">
+                                <span className="w-1.5 h-1.5 rounded-full bg-green-500" /> Solution
+                              </p>
+                              <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">{project.solution}</p>
+                            </div>
                           </div>
 
                           {/* Footer: Tech Stack & Button */}
                           <div className="flex items-end justify-between pt-4 border-t border-white/10">
-                             <div className="flex gap-8">
-                                <TechGroup label="Frontend" icons={project.frontend} />
-                                <TechGroup label="Backend" icons={project.backend} />
-                             </div>
-                             
-                             <motion.button 
-                               whileHover={{ scale: 1.05 }}
-                               whileTap={{ scale: 0.95 }}
-                               className="h-12 px-6 rounded-xl bg-white text-black flex items-center gap-2 font-bold text-xs uppercase tracking-widest shrink-0 transition-colors hover:bg-purple-50"
-                             >
-                               Explore <ArrowUpRight size={16} />
-                             </motion.button>
+                            <div className="flex gap-8">
+                              <TechGroup label="Frontend" icons={project.frontend} />
+                              <TechGroup label="Backend" icons={project.backend} />
+                            </div>
+
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              className="h-11 px-5 rounded-xl bg-white text-black flex items-center gap-2 font-semibold text-xs uppercase tracking-wide shrink-0 transition-all hover:bg-purple-100 hover:scale-105"
+                            >
+                              Explore <ArrowUpRight size={16} />
+                            </motion.button>
                           </div>
 
                         </div>
@@ -186,11 +192,11 @@ const TechGroup = ({ label, icons }: { label: string; icons: TechItem[] }) => (
     <div className="flex gap-2">
       {icons.map((tech, i) => (
         <div key={i} className="group/item relative">
-          <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all cursor-help">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all cursor-help">
             {tech.icon}
           </div>
           {/* Tooltip */}
-          <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-white/10 backdrop-blur-xl border border-white/20 text-[10px] font-bold text-white opacity-0 group-hover/item:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+          <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-white/10 backdrop-blur-xl border border-white/20 text-[10px] font-bold text-white opacity-0 group-hover/item:opacity-100 transition duration-200 transition-opacity pointer-events-none whitespace-nowrap">
             {tech.name}
           </span>
         </div>
