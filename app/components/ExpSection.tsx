@@ -41,7 +41,7 @@ export const Experience = () => {
   const scaleY = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   return (
-    <section ref={containerRef} className="relative py-14 bg-transparent text-white">
+    <section id="experience" ref={containerRef} className="relative py-14 bg-transparent text-white">
       {/* Dynamic Background Accents */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[80px] -z-10 animate-pulse" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-pink-600/5 rounded-full blur-[80px] -z-10" />

@@ -19,7 +19,7 @@ export const HomeSection = () => {
 
   return (
     <>
-      <section className="relative min-h-screen flex pt-24 md:pt-0 items-center overflow-hidden px-4 sm:px-6">
+      <section id="home" className="relative min-h-screen flex pt-24 md:pt-0 items-center overflow-hidden px-4 sm:px-6">
 
         {/* 🔥 BACKGROUND (delayed + lighter) */}
         <div className="absolute inset-0 -z-10">
