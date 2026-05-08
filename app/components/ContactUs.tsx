@@ -3,19 +3,39 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Mail, CheckCircle2, Sparkles, ArrowUpRight, User, MessageSquare, Terminal, Globe } from "lucide-react";
+import { apiClient } from "@/lib/apiClient";
 
 export const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-
+  const [form, setForm] = useState({
+    full_name: "",
+    email: "",
+    description: "",
+    content: "",
+  });
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+
+    try {
+      setLoading(true);
+
+      await apiClient.post("/contact", form);
+
       setSuccess(true);
+      setForm({
+        full_name: "",
+        email: "",
+        description: "",
+        content: "",
+      });
+
       setTimeout(() => setSuccess(false), 4000);
-    }, 2000);
+    } catch (error: any) {
+      console.error(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -26,9 +46,9 @@ export const Contact = () => {
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full">
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
-          
+
           {/* LEFT: Branding Content */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -39,28 +59,28 @@ export const Contact = () => {
                 <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
                 Open for Collaboration
               </div>
-              
+
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[1.1]">
                 Let's craft <br />
                 <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-rose-400 bg-clip-text text-transparent">
                   Something Iconic.
                 </span>
               </h2>
-              
+
               <p className="text-gray-400 text-sm sm:text-base md:text-xl leading-relaxed max-w-lg">
-                I build high-performance digital experiences that command attention. 
+                I build high-performance digital experiences that command attention.
                 Your vision, powered by the MERN stack.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-               <ContactInfo icon={<Mail size={22}/>} label="Direct Email" value="Rt125280@gmail.com" />
-               <ContactInfo icon={<Globe size={22}/>} label="Availability" value="Remote • Global" />
+              <ContactInfo icon={<Mail size={22} />} label="Direct Email" value="Rt125280@gmail.com" />
+              <ContactInfo icon={<Globe size={22} />} label="Availability" value="Remote • Global" />
             </div>
           </motion.div>
 
           {/* RIGHT: THE FORM */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
@@ -68,30 +88,48 @@ export const Contact = () => {
           >
             <form onSubmit={handleSubmit} className="relative group/form">
               <div className="relative p-6 sm:p-8 md:p-12 rounded-[2.5rem] bg-white/[0.02] border border-white/10 shadow-2xl backdrop-blur-3xl overflow-hidden">
-                
+
                 <div className="space-y-8">
                   <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
-                    <FloatingInput label="Full Name" icon={<User size={18}/>} />
-                    <FloatingInput label="Email Address" type="email" icon={<Mail size={18}/>} />
+                    <FloatingInput label="Full Name"
+                      name="full_name"
+                      value={form.full_name}
+                      onChange={(e: any) => setForm({ ...form, full_name: e.target.value })}
+                      icon={<User size={18} />} />
+                    <FloatingInput
+                      label="Email Address"
+                      name="email"
+                      type="email"
+                      icon={<Mail size={18} />}
+                      value={form.email}
+                      onChange={(e: any) => setForm({ ...form, email: e.target.value })}
+                    />
                   </div>
 
-                  <FloatingInput label="What are we building?" icon={<Terminal size={18}/>} />
+                  <FloatingInput label="What are we building?"
+                  name="description"
+                    value={form.description}
+                    onChange={(e: any) => setForm({ ...form, description: e.target.value })}
+                    icon={<Terminal size={18} />} />
 
                   {/* FIXED TEXTAREA: No scrollbar, No overlap, Matching spacing */}
                   <div className="relative group">
                     <div className="absolute right-0 top-4 text-white/10 group-focus-within:text-purple-500 transition-colors duration-500">
-                        <MessageSquare size={18} />
+                      <MessageSquare size={18} />
                     </div>
-                    <textarea 
+                    <textarea
                       required
+                      name="content"
+                      value={form.content}
+                      onChange={(e) => setForm({ ...form, content: e.target.value })}
                       className="peer w-full bg-transparent border-b border-white/10 py-4 pr-10 outline-none transition-all duration-500 text-sm sm:text-base text-gray-100 placeholder-transparent focus:border-purple-500 resize-none min-h-[50px] scrollbar-hide"
-                      placeholder=" " 
+                      placeholder=" "
                       style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     />
                     <label className="absolute left-0 top-4 text-gray-500 text-xs font-bold tracking-widest transition-all duration-500 pointer-events-none 
                       peer-focus:-top-2 peer-focus:text-purple-400 peer-focus:text-[10px] peer-focus:font-black
                       peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-purple-400 peer-[:not(:placeholder-shown)]:text-[10px]">
-                       TELL ME ABOUT YOUR VISION
+                      TELL ME ABOUT YOUR VISION
                     </label>
                     <div className="absolute bottom-[5px] left-0 h-[2px] w-0 bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-700 peer-focus:w-full shadow-[0_1px_10px_rgba(168,85,247,0.5)]" />
                   </div>
@@ -134,15 +172,17 @@ export const Contact = () => {
 };
 
 // FIXED: Added pr-10 to prevent icon overlap, unified label top
-const FloatingInput = ({ label, icon, type = "text" }: any) => {
+const FloatingInput = ({ label, icon, type = "text", value, onChange }: any) => {
   return (
     <div className="relative group">
       <div className="absolute right-0 top-4 text-white/10 group-focus-within:text-purple-500 transition-colors duration-500">
         {icon}
       </div>
-      <input 
+      <input
         type={type}
         required
+        value={value}
+        onChange={onChange}
         className="peer w-full bg-transparent border-b border-white/10 py-4 pr-10 outline-none transition-all duration-500 text-sm sm:text-base text-gray-100 placeholder-transparent focus:border-purple-500"
         placeholder=" "
       />

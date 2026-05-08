@@ -14,7 +14,7 @@ export const Header = () => {
   <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
     VR
   </span>
-</h1> */}.
+</h1> */}
         <Image
           src={"/images/logo.png"}
           alt="logo"
