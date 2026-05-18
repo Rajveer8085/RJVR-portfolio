@@ -219,7 +219,7 @@ export default function TechStack() {
   return (
     <section ref={ref} className="bg-[#050505] text-white selection:bg-yellow-400 selection:text-black">
       <div className="md:min-h-screen relative">
-        <div className="md:sticky md:top-0 min-h-screen flex items-center overflow-hidden">
+        <div className="md:sticky md:top-0 md:min-h-screen flex items-center overflow-hidden">
 
           {/* BACKGROUND TEXT DECORATION */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none opacity-[0.02]">
