@@ -13,19 +13,19 @@ type ExperienceType = {
 const experiences: ExperienceType[] = [
   {
     company: "TCQ IT Solution",
-    role: "Senior MERN Developer",
+    role: "MERN Stack Developer",
     duration: "Oct 2025 - Present",
-    desc: "Architecting high-scale applications using Next.js 14 and Node.js. Optimized database queries reducing latency by 40%.",
+    desc: "Architecting high-scale applications using Next.js and Node.js. Optimized database queries reducing latency by 40%.",
   },
   {
     company: "It Geeks",
-    role: "Full Stack Engineer",
+    role: "Full Stack Developer",
     duration: "Jan 2025 - Sep 2025",
     desc: "Led the development of real-time collaboration tools and integrated complex WebRTC features for video streaming.",
   },
   {
-    company: "Future Tech",
-    role: "Frontend Specialist",
+    company: "Projection Edtech.",
+    role: "Full Stack Intern",
     duration: "Jun 2024 - Dec 2024",
     desc: "Focused on high-performance UI components and framer-motion animations to create immersive user experiences.",
   },

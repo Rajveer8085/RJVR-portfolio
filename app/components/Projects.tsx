@@ -154,7 +154,7 @@ export const Projects = () => {
                           </div>
 
                           {/* Footer: Tech Stack & Button */}
-                          <div className="flex items-end justify-between pt-4 border-t border-white/10">
+                          <div className="flex flex-col gap-6 md:flex-row md:items-center justify-between pt-4 border-t border-white/10">
                             <div className="flex gap-8">
                               <TechGroup label="Frontend" icons={project.frontend} />
                               <TechGroup label="Backend" icons={project.backend} />
@@ -163,7 +163,7 @@ export const Projects = () => {
                             <motion.button
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
-                              className="h-11 px-5 rounded-xl bg-white text-black flex items-center gap-2 font-semibold text-xs uppercase tracking-wide shrink-0 transition-all hover:bg-purple-100 hover:scale-105"
+                              className="h-11 px-5 rounded-xl bg-white text-center text-black flex items-center justify-center gap-2 font-semibold text-xs uppercase tracking-wide shrink-0 transition-all hover:bg-purple-100 hover:scale-105"
                             >
                               Explore <ArrowUpRight size={16} />
                             </motion.button>

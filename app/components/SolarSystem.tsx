@@ -36,6 +36,7 @@ export default function SolarSystem() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.setSize(w0, h0)
     renderer.setClearColor(0x000000, 0)
+    renderer.domElement.style.touchAction = "pan-y"
     mount.appendChild(renderer.domElement)
 
     // ── Controls ──────────────────────────────────────────────────────────────
@@ -43,7 +44,16 @@ export default function SolarSystem() {
     controls.target.set(0, 0, 0)  // ← centred on world origin (was offset to y=3 before)
     controls.update()
     controls.enableDamping = true
-    controls.enableRotate = true
+    const isMobile = window.innerWidth < 768
+
+    controls.enableRotate = !isMobile
+    controls.enablePan = false
+    controls.enableZoom = false
+
+    if (isMobile) {
+      controls.touches.ONE = 4 as any
+      controls.touches.TWO = 4 as any
+    }
     controls.enableZoom = false
     controls.minDistance = 26
     controls.maxDistance = 100
@@ -76,11 +86,11 @@ export default function SolarSystem() {
 
     // ── Planet data ───────────────────────────────────────────────────────────
     const planetData = [
-      { name: "React",      icon: "/icons/logos--react.png", radius: 1.2, distance: 10, speed: 0.020 },
-      { name: "NextJS",     icon: "/icons/next.png",         radius: 1.2, distance: 15, speed: 0.018 },
-      { name: "TypeScript", icon: "/icons/typescript.png",   radius: 1.2, distance: 20, speed: 0.015 },
-      { name: "NodeJS",     icon: "/icons/node.png",         radius: 1.2, distance: 25, speed: 0.012 },
-      { name: "MongoDB",    icon: "/icons/mongo.png",        radius: 1.2, distance: 30, speed: 0.010 },
+      { name: "React", icon: "/icons/logos--react.png", radius: 1.2, distance: 10, speed: 0.020 },
+      { name: "NextJS", icon: "/icons/next.png", radius: 1.2, distance: 15, speed: 0.018 },
+      { name: "TypeScript", icon: "/icons/typescript.png", radius: 1.2, distance: 20, speed: 0.015 },
+      { name: "NodeJS", icon: "/icons/node.png", radius: 1.2, distance: 25, speed: 0.012 },
+      { name: "MongoDB", icon: "/icons/mongo.png", radius: 1.2, distance: 30, speed: 0.010 },
     ]
 
     // ── Orbit rings ───────────────────────────────────────────────────────────

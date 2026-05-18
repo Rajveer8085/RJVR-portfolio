@@ -32,7 +32,7 @@ export default function SkillSection() {
       </div>
 
       {/* Solar System — w-full so it never bleeds outside the section */}
-      <div className="w-full overflow-hidden">
+      <div className="w-full overflow-hidden max-h-50">
         <SolarSystem />
       </div>
 

@@ -4,7 +4,7 @@ import SpotlightCard from "../Animation/SpotlightCard"
 
 export const AboutSection = () => {
     return (
-        <section id="about" className="relative py-20 md:py-28 pb-10 overflow-hidden bg-black px-4 sm:px-6">
+        <section id="about" className="relative  md:py-28 pb-10 overflow-hidden bg-black px-4 sm:px-6">
 
             {/* --- Ambient Background Elements --- */}
             {/* Top Left Glow */}
