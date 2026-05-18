@@ -4,7 +4,7 @@ import SolarSystem from "./SolarSystem"
 
 export default function SkillSection() {
   return (
-    <section className="relative pt-10 sm:pt-12 md:pt-16 px-4 bg-[#020412] text-white overflow-hidden min-h-screen">
+    <section className="relative pt-10 sm:pt-12 md:pt-16 px-4 bg-[#020412] text-white overflow-hidden">
 
       {/* Background glows */}
       <div className="absolute -top-40 -left-40 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-purple-500/10 rounded-full blur-[120px] sm:blur-[160px] pointer-events-none" />

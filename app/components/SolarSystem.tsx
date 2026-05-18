@@ -215,11 +215,11 @@ export default function SolarSystem() {
     const mount = mountRef.current!
 
     const getCameraZ = (w: number) => {
-      if (w < 400) return 85
-      if (w < 600) return 72
-      if (w < 900) return 60
-      if (w < 1200) return 50
-      return 42
+      if (w < 400) return 90
+      if (w < 600) return 78
+      if (w < 900) return 65
+      if (w < 1200) return 55
+      return 46
     }
 
     const scene = new THREE.Scene()
@@ -227,41 +227,39 @@ export default function SolarSystem() {
     const h0 = mount.clientHeight
 
     const camera = new THREE.PerspectiveCamera(60, w0 / h0, 0.1, 1000)
-    // ✅ FIX 1: Keep Y=0 so camera looks straight at the solar system — no dead space
-    camera.position.set(0, 0, getCameraZ(w0))
+    camera.position.set(0, 18, getCameraZ(w0))
     camera.lookAt(0, 0, 0)
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.setSize(w0, h0)
     renderer.setClearColor(0x000000, 0)
-
-    // ✅ FIX 2: On mobile, let the browser handle touch for scrolling
-    const isMobile = window.innerWidth < 768
-    if (isMobile) {
-      renderer.domElement.style.touchAction = "auto"
-      renderer.domElement.style.pointerEvents = "none"
-    } else {
-      renderer.domElement.style.touchAction = "none"
-    }
-
     mount.appendChild(renderer.domElement)
 
+    // ── Controls (declared first, then configured) ─────────────────────────
     const controls = new OrbitControls(camera, renderer.domElement)
     controls.target.set(0, 0, 0)
     controls.enableDamping = true
-
-    if (isMobile) {
-      controls.enabled = false
-    } else {
-      controls.enableRotate = true
-      controls.enablePan = false
-      controls.enableZoom = false
-    }
     controls.minDistance = 26
     controls.maxDistance = 100
 
-    // ── Sun ───────────────────────────────────────────────────────────────────
+    const isMobile = window.innerWidth < 768
+
+    // ✅ Mobile: lock all interaction + pass touch events to page for scroll
+    // ✅ Desktop: rotation enabled, pan/zoom disabled
+    if (isMobile) {
+      controls.enabled = false
+      renderer.domElement.style.touchAction = "auto"
+      renderer.domElement.style.pointerEvents = "none"
+    } else {
+      controls.enabled = true
+      controls.enableRotate = true
+      controls.enablePan = false
+      controls.enableZoom = false
+      renderer.domElement.style.touchAction = "none"
+    }
+
+    // ── Sun ───────────────────────────────────────────────────────────────
     const loader = new THREE.TextureLoader()
     const sunTexture = loader.load("/textures/2k_sun.jpg")
     sunTexture.colorSpace = THREE.SRGBColorSpace
@@ -274,7 +272,7 @@ export default function SolarSystem() {
     )
     scene.add(sun)
 
-    // ── Stars ─────────────────────────────────────────────────────────────────
+    // ── Stars ─────────────────────────────────────────────────────────────
     const starVerts: number[] = []
     for (let i = 0; i < 1200; i++) {
       starVerts.push(
@@ -287,7 +285,7 @@ export default function SolarSystem() {
     starGeo.setAttribute("position", new THREE.Float32BufferAttribute(starVerts, 3))
     scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.7, sizeAttenuation: true })))
 
-    // ── Planet data ───────────────────────────────────────────────────────────
+    // ── Planet data ───────────────────────────────────────────────────────
     const planetData = [
       { name: "React", icon: "/icons/logos--react.png", radius: 1.2, distance: 10, speed: 0.020 },
       { name: "NextJS", icon: "/icons/next.png", radius: 1.2, distance: 15, speed: 0.018 },
@@ -346,20 +344,19 @@ export default function SolarSystem() {
     scene.add(new THREE.AmbientLight(0xffffff, 0.5))
     scene.add(new THREE.PointLight(0xffffff, 2))
 
-    // ── Resize ────────────────────────────────────────────────────────────────
+    // ── Resize ────────────────────────────────────────────────────────────
     const handleResize = () => {
       const w = mount.clientWidth
       const h = mount.clientHeight
       camera.aspect = w / h
       camera.updateProjectionMatrix()
       renderer.setSize(w, h)
-      // ✅ FIX 1: Keep Y=0 on resize too — consistent flat top-down view
-      camera.position.set(0, 0, getCameraZ(w))
+      camera.position.set(0, 18, getCameraZ(w))
       controls.update()
     }
     window.addEventListener("resize", handleResize)
 
-    // ── Animation ─────────────────────────────────────────────────────────────
+    // ── Animation ─────────────────────────────────────────────────────────
     let rafId: number
     const animate = () => {
       rafId = requestAnimationFrame(animate)
@@ -383,6 +380,7 @@ export default function SolarSystem() {
     }
     animate()
 
+    // ── Cleanup ───────────────────────────────────────────────────────────
     return () => {
       cancelAnimationFrame(rafId)
       window.removeEventListener("resize", handleResize)
@@ -396,7 +394,6 @@ export default function SolarSystem() {
   return (
     <div
       ref={mountRef}
-      // ✅ FIX 1: Tighter clamp — less wasted vertical space
       style={{ width: "100%", height: "clamp(300px, 50vh, 600px)" }}
     />
   )
