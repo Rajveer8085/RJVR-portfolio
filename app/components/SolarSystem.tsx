@@ -44,15 +44,16 @@ export default function SolarSystem() {
     controls.target.set(0, 0, 0)  // ← centred on world origin (was offset to y=3 before)
     controls.update()
     controls.enableDamping = true
+
     const isMobile = window.innerWidth < 768
 
-    controls.enableRotate = !isMobile
-    controls.enablePan = false
-    controls.enableZoom = false
-
     if (isMobile) {
-      controls.touches.ONE = 4 as any
-      controls.touches.TWO = 4 as any
+      controls.enabled = false
+    } else {
+      controls.enableDamping = true
+      controls.enableRotate = true
+      controls.enablePan = false
+      controls.enableZoom = false
     }
     controls.enableZoom = false
     controls.minDistance = 26
